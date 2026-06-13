@@ -1,9 +1,14 @@
 import cloudinary from '../config/cloudinary.js';
 import multer from 'multer';
 
+import os from 'os';
+
 // Increase file size limit to 50MB
+// Use /tmp on serverless environments because the root file system is read-only
+const uploadDir = process.env.VERCEL || process.env.NODE_ENV === 'production' ? os.tmpdir() : 'uploads/';
+
 const upload = multer({
-    dest: 'uploads/',
+    dest: uploadDir,
     limits: {
         fileSize: 50 * 1024 * 1024 // 50MB in bytes
     }
