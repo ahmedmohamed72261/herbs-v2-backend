@@ -20,7 +20,30 @@ const dbMiddleware = async (req, res, next) => {
 
 const app = express();
 
-app.use(cors());
+// Comprehensive CORS configuration
+const corsOptions = {
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'http://127.0.0.1:3000',
+            'http://127.0.0.1:3001',
+        ];
+        
+        // Allow requests with no origin (mobile apps, curl requests)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'X-CSRF-Token'],
+    maxAge: 86400
+};
+
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(dbMiddleware);
@@ -30,11 +53,6 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.path}`);
     console.log('Headers:', req.headers);
     console.log('Body:', req.body);
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin, X-CSRF-Token');
-    res.header('Access-Control-Max-Age', '86400');
-    res.header('Access-Control-Expose-Headers', 'Authorization, Content-Length, X-JSON-Response');
 
     if (req.method === 'OPTIONS') {
         return res.sendStatus(200);

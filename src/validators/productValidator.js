@@ -22,6 +22,15 @@ export const productStoreValidator = [
     body('meta_title_ar').optional().trim(),
     body('meta_description_en').optional().trim(),
     body('meta_description_ar').optional().trim(),
+    body('origin').optional().trim(),
+    body('form').optional().trim(),
+    body('color').optional().trim(),
+    body('purity').optional().trim(),
+    body('moisture').optional().trim(),
+    body('packaging').optional().trim(),
+    body('shelf_life').optional().trim(),
+    body('certifications').optional().isArray(),
+    body('export_availability').optional().trim(),
 ];
 
 export const productUpdateValidator = [
@@ -46,4 +55,13 @@ export const productUpdateValidator = [
     body('meta_title_ar').optional().trim(),
     body('meta_description_en').optional().trim(),
     body('meta_description_ar').optional().trim(),
+    body('origin').optional().trim(),
+    body('form').optional().trim(),
+    body('color').optional().trim(),
+    body('purity').optional().trim(),
+    body('moisture').optional().trim(),
+    body('packaging').optional().trim(),
+    body('shelf_life').optional().trim(),
+    body('certifications').optional().isArray(),
+    body('export_availability').optional().trim(),
 ];

@@ -85,6 +85,43 @@ const productSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  origin: {
+    type: String,
+    trim: true,
+    default: 'Egypt',
+  },
+  form: {
+    type: String,
+    trim: true,
+  },
+  color: {
+    type: String,
+    trim: true,
+  },
+  purity: {
+    type: String,
+    trim: true,
+  },
+  moisture: {
+    type: String,
+    trim: true,
+  },
+  packaging: {
+    type: String,
+    trim: true,
+  },
+  shelf_life: {
+    type: String,
+    trim: true,
+  },
+  certifications: {
+    type: [String],
+    default: [],
+  },
+  export_availability: {
+    type: String,
+    trim: true,
+  },
 }, {
   timestamps: true,
   toJSON: { virtuals: true },

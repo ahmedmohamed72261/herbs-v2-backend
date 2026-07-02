@@ -6,6 +6,7 @@ import { index as certificateIndex, adminIndex as certificateAdminIndex, show as
 import { index as catalogIndex, adminIndex as catalogAdminIndex, show as catalogShow, store as catalogStore, update as catalogUpdate, destroy as catalogDestroy } from '../controllers/catalogController.js';
 import { index as contactIndex, show as contactShow, store as contactStore, update as contactUpdate, destroy as contactDestroy, markAsRead } from '../controllers/contactMessageController.js';
 import { index as teamIndex, adminIndex as teamAdminIndex, show as teamShow, store as teamStore, update as teamUpdate, destroy as teamDestroy } from '../controllers/teamMemberController.js';
+import { index as exportCountryIndex, adminIndex as exportCountryAdminIndex, show as exportCountryShow, store as exportCountryStore, update as exportCountryUpdate, destroy as exportCountryDestroy } from '../controllers/exportCountryController.js';
 import { uploadFile, upload } from '../controllers/uploadController.js';
 import { auth } from '../middleware/auth.js';
 import validateRequest from '../middleware/validateRequest.js';
@@ -16,6 +17,7 @@ import { certificateStoreValidator, certificateUpdateValidator } from '../valida
 import { catalogStoreValidator, catalogUpdateValidator } from '../validators/catalogValidator.js';
 import { contactMessageStoreValidator, contactMessageUpdateValidator } from '../validators/contactMessageValidator.js';
 import { teamMemberStoreValidator, teamMemberUpdateValidator } from '../validators/teamMemberValidator.js';
+import { exportCountryStoreValidator, exportCountryUpdateValidator } from '../validators/exportCountryValidator.js';
 
 const router = express.Router();
 
@@ -35,6 +37,8 @@ router.get('/catalogs/:id', catalogShow);
 router.get('/team-members', teamIndex);
 router.get('/team-members/:id', teamShow);
 router.post('/contact-messages', contactMessageStoreValidator, validateRequest, contactStore);
+router.get('/export-countries', exportCountryIndex);
+router.get('/export-countries/:id', exportCountryShow);
 
 // Protected admin routes
 router.use(auth);
@@ -74,5 +78,10 @@ router.get('/admin/team-members', teamAdminIndex);
 router.post('/admin/team-members', teamMemberStoreValidator, validateRequest, teamStore);
 router.put('/admin/team-members/:id', teamMemberUpdateValidator, validateRequest, teamUpdate);
 router.delete('/admin/team-members/:id', teamDestroy);
+
+router.get('/admin/export-countries', exportCountryAdminIndex);
+router.post('/admin/export-countries', exportCountryStoreValidator, validateRequest, exportCountryStore);
+router.put('/admin/export-countries/:id', exportCountryUpdateValidator, validateRequest, exportCountryUpdate);
+router.delete('/admin/export-countries/:id', exportCountryDestroy);
 
 export default router;

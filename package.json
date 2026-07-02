@@ -7,7 +7,13 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "init:admin": "node scripts/initAdmin.js"
+    "init:admin": "node scripts/initAdmin.js",
+    "seed": "node scripts/seedData.js",
+    "seed:fresh": "node scripts/seedData.js --fresh",
+    "seed:countries": "node scripts/seedExportCountries.js",
+    "seed:countries:fresh": "node scripts/seedExportCountries.js --fresh",
+    "seed:details": "node scripts/seedProductDetails.js",
+    "seed:details:fresh": "node scripts/seedProductDetails.js --fresh"
   },
   "keywords": [],
   "author": "",
