@@ -30,7 +30,7 @@ const corsOptions = {
             'http://127.0.0.1:3001',
             'https://herbs-mosad-front.vercel.app',
             'https://admin-herbs.vercel.app',
-            'https://herbs-mosaad-admin.vercel.app/'
+            'https://herbs-mosaad-admin.vercel.app'
         ];
         
         // Allow requests with no origin (mobile apps, curl requests)
